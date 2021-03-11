@@ -3,7 +3,7 @@ import java.sql.*;
 public class TestConnection {
     public static void main(String[] args) {
 
-        String url = "jdbc:oracle:thin:@54.172.209.6:1521:XE";
+        String url = "jdbc:oracle:thin:@3.88.130.74:1521:XE";
 
 
         try{

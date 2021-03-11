@@ -9,7 +9,7 @@ public class JDBC_FirstStep {
 
         public static void main(String[] args) {
 
-            String url = "jdbc:oracle:thin:@54.236.150.168:1521:XE" ;
+            String url = "jdbc:oracle:thin:@3.88.130.74:1521:XE" ;
             try {
                 Connection con = DriverManager.getConnection(url, "hr", "hr");
                 // This way creating statement object

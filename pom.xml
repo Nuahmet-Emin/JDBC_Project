@@ -28,6 +28,12 @@
             <artifactId>postgresql</artifactId>
             <version>42.2.19</version>
         </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.23</version>
+        </dependency>
     </dependencies>
 
     <!-- THIS IS THE BUILD PLUGIN TO MAKE SURE YOU ARE ALWAYS BUILDING WITH JAVA 8  -->
