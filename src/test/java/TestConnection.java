@@ -9,7 +9,7 @@ public class TestConnection {
         try{
             Connection con = DriverManager.getConnection(url, "hr","hr");
            // this way creating statement object
-            //will allow us to move forward and backword
+            //will allow us to move forward and backward
             Statement stmnt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
            ResultSet  rs = stmnt.executeQuery("SELECT * From REGIONS");
 
@@ -21,6 +21,7 @@ public class TestConnection {
             System.out.println("First Row Region is " + rs.getString("REGION_NAME"));
 
             System.out.println("Connection Successful");
+            con.close();
         }catch (SQLException e){
             System.out.println("Connection has Failed" + e.getMessage()) ;
         }

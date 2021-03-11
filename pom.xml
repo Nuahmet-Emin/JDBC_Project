@@ -22,6 +22,12 @@
             <version>19.3.0.0</version>
 
         </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.19</version>
+        </dependency>
     </dependencies>
 
     <!-- THIS IS THE BUILD PLUGIN TO MAKE SURE YOU ARE ALWAYS BUILDING WITH JAVA 8  -->
