@@ -238,8 +238,9 @@ public class DB_Utility {
             resetCursor();
         }
 
-
     }
+
+
 
     public static Map<String,String> getRowMap(int rowNum){
 
@@ -263,6 +264,24 @@ public class DB_Utility {
         return rowMap;
     }
 
+    public static List<Map<String,String>> getAllRowAsListOfMap(){
+
+        List<Map<String,String>> allRowListOfMap = new ArrayList<>();
+
+        int rowCount = getRowCount();
+        // move from first row till last row
+        // get each row as map object and add it to the list
+
+        for (int rowIndex = 1; rowIndex <= rowCount ; rowIndex++) {
+            Map<String,String> rowMap = getRowMap(rowIndex);
+
+            allRowListOfMap.add(rowMap);
+
+        }
+        resetCursor();
+
+        return allRowListOfMap;
+    }
 
 
 

@@ -48,6 +48,8 @@ public class UtilityRun {
 
         System.out.println("DB_Utility.getRowMap(1) = " + DB_Utility.getRowMap(1));
 
+        System.out.println("DB_Utility.getAllDataAsListOfMap() = " + DB_Utility.getAllRowAsListOfMap());
+
 
         DB_Utility.destroy();
 
