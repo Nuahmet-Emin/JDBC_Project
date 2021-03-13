@@ -24,13 +24,15 @@ public class DB_Utility {
         String username = ConfigurationReader.getProperty("hr.database.username") ;
         String password = ConfigurationReader.getProperty("hr.database.password") ;
 
-        try {
+
+        /*try {
             Connection con = DriverManager.getConnection(url , username, password) ;
             System.out.println("CONNECTION SUCCESSFUL");
         } catch (SQLException e) {
             System.out.println("CONNECTION HAS FAILED " + e.getMessage() );
-        }
+        }*/
 
+        createConnection(url,username,password);
 
     }
 
@@ -76,6 +78,16 @@ public class DB_Utility {
             }
     }
 
+    // reset cursor
+
+    private static void resetCursor(){
+        try {
+            rs.beforeFirst();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
 
     public static int getRowCount(){
         int rowCount = 0;
@@ -86,6 +98,8 @@ public class DB_Utility {
 
         } catch (SQLException e) {
             System.out.println("ERROR WHILE GETTING ROW COUNT " + e.getMessage());
+        }finally {
+            resetCursor();
         }
         return rowCount;
 
@@ -141,6 +155,48 @@ public class DB_Utility {
         return rowDataList;
     }
 
+    public static String getCellValue(int rowNum , int columnIndex) {
+
+        String cellValue = "" ;
+
+        try {
+            rs.absolute(rowNum) ;
+            cellValue = rs.getString(columnIndex ) ;
+
+        } catch (SQLException e) {
+            System.out.println("ERROR OCCURRED WHILE getCellValue " + e.getMessage() );
+        }finally {
+            resetCursor();
+        }
+        return cellValue ;
+
+    }
+
+
+
+    public static String getCellValue(int rowNum, String columnName){
+
+        String cellValue = "";
+
+        try{
+            rs.absolute(rowNum);
+            cellValue = rs.getString(columnName);
+
+        }catch (SQLException e){
+            System.out.println("ERROR OCCURRED WHILE getCellValue" + e.getMessage());
+        }finally {
+            resetCursor();
+        }
+
+        return cellValue;
+    }
+
+    // get first cell value from First row First Column
+    public static String getFirstRowFirstColumn(){
+
+        return getCellValue(1,1);
+    }
+
     public static String getColumnDataAtRow(int rowNum, int columnIndex){
         String result = "";
 
@@ -151,6 +207,8 @@ public class DB_Utility {
 
         } catch (SQLException throwables) {
             System.out.println("Error While getColumnDataAtRow");
+        }finally {
+            resetCursor();
         }
         return  result;
     }
@@ -167,6 +225,8 @@ public class DB_Utility {
 
         } catch (SQLException throwables) {
             System.out.println("Error While getColumnDataAtRow");
+        }finally {
+            resetCursor();
         }
         return  result;
     }
@@ -186,6 +246,8 @@ public class DB_Utility {
             rs.beforeFirst();
         }catch (SQLException e){
             System.out.println("ERROR WHILE getColumnDataAsList " + e.getMessage());
+        }finally {
+            resetCursor();
         }
 
         return columnDataList;
@@ -205,20 +267,14 @@ public class DB_Utility {
             rs.beforeFirst();
         }catch (SQLException e){
             System.out.println("ERROR WHILE getColumnDataAsList " + e.getMessage());
+        }finally {
+            resetCursor();
         }
 
         return columnDataList;
     }
 
-    // reset cursor
 
-    public static void resetCursor(){
-        try {
-            rs.beforeFirst();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
 
     // display all data
     public static  void displayAllData(){
@@ -227,7 +283,8 @@ public class DB_Utility {
             while (rs.next()){ //get each raw
                 for (int colNum = 1;  colNum <= getColumnCount(); colNum++) {
 
-                    System.out.print(rs.getString(colNum) + "\t");
+                    //System.out.print( rs.getString(colIndex) + "\t" );
+                    System.out.printf("%-25s", rs.getString(colNum));
                 }
                 System.out.println();
             }
@@ -259,6 +316,8 @@ public class DB_Utility {
 
         } catch (SQLException e) {
             System.out.println("ERROR AT ROW MAP FUNCTION " + e.getMessage());
+        }finally {
+            resetCursor();
         }
 
         return rowMap;
